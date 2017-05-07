@@ -13,8 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    lancamentowindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    lancamentowindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    lancamentowindow.ui
