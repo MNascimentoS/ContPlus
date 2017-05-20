@@ -1,9 +1,0 @@
-Makefile
-moc_*
-.qmake.stash
-moc_predefs.h
-ui_*
-*.o
-*~
-ContPlus.pro.user.*
-ContPlus
