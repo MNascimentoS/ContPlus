@@ -27,10 +27,10 @@ public class UsuarioDAO {
     public boolean insert(Usuario usuario, String tipo) {
         Connection con = new DatabaseMySQL().getConnection();
         try {
-            final String insert = "INSERT INTO usuario (nome, login, senha, tipo) values(?,?,?,?)";
+            final String insert = "INSERT INTO usuario (nome, email, senha, tipo) values(?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(insert);
             pst.setString(1, usuario.getNome());
-            pst.setString(2, usuario.getLogin());
+            pst.setString(2, usuario.getEmail());
             pst.setString(3, usuario.getSenha());
             pst.setString(4, tipo);
             pst.executeUpdate();
@@ -51,9 +51,9 @@ public class UsuarioDAO {
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setId(resultado.getInt("id"));
+                usuario.setId(resultado.getInt("idusuario"));
                 usuario.setNome(resultado.getString("nome"));
-                usuario.setLogin(resultado.getString("login"));
+                usuario.setEmail(resultado.getString("email"));
                 usuario.setSenha(resultado.getString("senha"));
                 usuario.setTipo(resultado.getString("tipo"));
                 usuario.setFoto(resultado.getInt("foto"));
@@ -73,15 +73,18 @@ public class UsuarioDAO {
         PreparedStatement pst = null;
         Connection con = null;
         ResultSet rs = null;
+        System.out.println("tipo: "+usuario.getEmail());
+        System.out.println("tipo: "+usuario.getSenha());
         try{
           con = new DatabaseMySQL().getConnection();
-          pst = con.prepareStatement("select * from usuario where login=? and senha=?");
-          pst.setString(1, usuario.getLogin());
+          pst = con.prepareStatement("select * from usuario where email=? and senha=?");
+          pst.setString(1, usuario.getEmail());
           pst.setString(2, usuario.getSenha()); 
           rs = pst.executeQuery();
           //if the user exists
           if(rs.next()){
-            usuario.setId(rs.getInt("id"));
+              System.out.println("entrei");
+            usuario.setId(rs.getInt("idusuario"));
             usuario.setNome(rs.getString("nome"));
             usuario.setTipo(rs.getString("tipo"));
             usuario.setValido(true);

@@ -16,8 +16,8 @@ public class DatabaseMySQL implements Database{
     private String mUrl;
 
     public DatabaseMySQL() {
-        mUrl = "jdbc:mysql://localhost:3306/sonaes";
-        mUser = "admin_sonaes";
+        mUrl = "jdbc:mysql://localhost:3306/contplus";
+        mUser = "contador";
         mPassword = "Pern@long4";
     }
     /**

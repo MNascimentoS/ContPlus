@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.domain.Adm;
-import model.domain.CoordenadorDeCurso;
-import model.domain.Discente;
 import model.domain.Usuario;
 import encryption.CryptMD5;
 
@@ -40,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         
         if (option.equals("login")) {
             Usuario usuario = new Usuario();
-            usuario.setLogin(request.getParameter("user_name"));
+            usuario.setEmail(request.getParameter("user_name"));
             usuario.setSenha(CryptMD5.cryptWithMD5(request.getParameter("password")));
             //message for erros
             String errorMessage;
@@ -48,23 +45,14 @@ public class LoginServlet extends HttpServlet {
             String indexPage;
             //user validate
             usuario.autenticar();
-            
+                
             if (usuario.eValido()) {
                 switch (usuario.getTipo()) {
-                    case "adm":
-                        usuario = new Adm(usuario.getNome(), usuario.getLogin(), usuario.getSenha(),
-                                usuario.getTipo(), usuario.getId(), usuario.getFoto());
+                    case "contador":
                         indexPage = "index_admin.jsp";
                         break;
-                    case "coord de curso":
-                        usuario = new CoordenadorDeCurso(usuario.getNome(), usuario.getLogin(), usuario.getSenha(),
-                                usuario.getTipo(), usuario.getId(), usuario.getFoto());
-                        indexPage = "index_coord.jsp";
-                        break;
-                    case "discente":
-                        usuario = new Discente(usuario.getNome(), usuario.getLogin(), usuario.getSenha(),
-                                usuario.getTipo(), usuario.getId(), usuario.getFoto());
-                        indexPage = "index_disc.jsp";
+                    case "auxiliar":
+                        indexPage = "index_aux.jsp";
                         break;
                     default:
                         indexPage = "login_page.jsp";
