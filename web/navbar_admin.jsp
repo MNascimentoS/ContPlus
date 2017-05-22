@@ -13,7 +13,7 @@
         <div id="navbar" class="navbar-fixed">
             <nav>
                 <div class="nav-wrapper">
-                    <h1 class="logo-wrapper"><a class="brand-logo darken-1"><img id="logo" src="images/logo.png" alt="ContPlus"></a> <span class="logo-text">SonAEs</span></h1>
+                    <h1 class="logo-wrapper"><a class="brand-logo darken-1"><img id="logo" src="images/white_logo.png" alt="ContPlus"></a> <span class="logo-text">SonAEs</span></h1>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="material-icons">settings_overscan</i></a>
                         </li>

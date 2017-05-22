@@ -39,6 +39,7 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="css/estilo.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="css/balanco.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="css/datapicker.css" type="text/css" rel="stylesheet" media="screen,projection">
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
         <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -77,10 +78,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Novo Lançamento</h5>
+                                    <h5 class="breadcrumbs-title">Gerar Balanço Patrimonial</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="index_aux.jsp">Cont+</a></li>
-                                        <li class="active">Novo Lançamento</li>
+                                        <li class="active">Balanço Patrimonial</li>
                                     </ol>
                                 </div>
                             </div>
@@ -90,61 +91,38 @@
                     <!--start container-->
                     <div class="container">
                         <br/>
-                        <form method="post" action="CadLancamentoServlet">
-                            <div class="row">
-                                <div class="input-field col s6 m3">
-                                    <%ArrayList<Conta> allConta = Conta.getAllFromDatabase();%>
-                                    <select id="conta" name="conta" class="browser-default" required>
-                                        <option value="default" disabled selected>Conta</option>
-                                        <%for (Conta conta : allConta) {
-                                            if (conta.getCodigo().length() > 4) {
-                                                %><option value="<%out.print(conta.getCodigo());%>"><%out.print(conta.getCodigo());%></option><%
-                                            }else{
-                                                %><option value="<%out.print(conta.getCodigo());%>" disabled><%out.print(conta.getNome());%></option><%
-                                            }
-                                        }%>
-                                    </select>
-                                </div>
-                                <div class="input-field col s6 m6">
-                                    <input id="name" name="name" type="text" class="validate" disabled>
-                                </div>
-                                <div class="input-field col s12 m3">
-                                    <input id="date"  name="date"type="date" class="datepicker" required>
-                                    <label for="date">Data</label>
-                                </div>
-                            </div>  
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <select name="tipo" class="browser-default" required>
-                                        <option value="credito">Crédito</option>
-                                        <option value="debito">Débito</option>
-                                    </select>
+                                    <input id="dateI"  name="dateI" type="date" class="datepicker" required>
+                                    <label for="dateI">Data Inicial</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="valor" name="valor" type="text" class="validate" required>
-                                    <label for="valor">Valor</label>
+                                    <input id="dateF"  name="dateF" type="date" class="datepicker" required>
+                                    <label for="dateF">Data Final</label>
                                 </div>
                             </div>  
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="observacao" name="observacao" class="materialize-textarea"></textarea>
-                                    <label for="observacao">Observação</label>
-                                </div>
-                            </div>
+                            <br/>
                             <!--botão para salvar as alterações-->
                             <div class="row">
                                 <div class="col s12">
                                     <button class="btn button waves-effect waves-light grey" type="cancell">
-                                    Cancelar
+                                        Cancelar
                                     </button>
-                                    <button class="btn button waves-effect waves-light teal" type="submit">
-                                    Salvar
+                                    <button id="submit" class="btn button waves-effect waves-light teal" type="submit" onclick="gerarBalanco()">
+                                        Gerar
                                     </button>
                                 </div>
                             </div>
-                        </form>
-                        <div id="search" name="search" style="display: none;"></div>
-                        <br/><br/><br/><br/>
+                        <br/>
+                        <div id="balanco-div" style="display: none;" >
+                            <div id="balanco" class="card small center" style="width: 760px; height: auto; padding: 5px;">
+                            </div>
+                            <br/>
+                            <button class="btn button waves-effect waves-light teal" type="submit">
+                                Imprimir
+                            </button>
+                        </div>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </div>
                     <!--end container-->
                 </section>
@@ -210,8 +188,18 @@
                     var name = $("#search")["0"].firstElementChild.name;
                     nomeInput.value = name;
                 }, 500);
-                
             });
+            
+            function gerarBalanco() {
+                document.getElementById('balanco-div').style.display = 'block';
+                var dataI = $("#dateI")["0"].value;
+                dataI = dataI.replace(/\s/g,'');
+                dataI = dataI.replace(/,/g,'');
+                var dataF = $("#dateF")["0"].value;
+                dataF = dataF.replace(/\s/g,'');
+                dataF = dataF.replace(/,/g,'');
+                $("#balanco").load("search.jsp?find=balanco&dataI=" + dataI + "&dataF=" + dataF);
+            }
         </script>
 
     </body>

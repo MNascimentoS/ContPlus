@@ -28,6 +28,7 @@
                 </li>
                 <li class="bold"><a href="index_aux.jsp" class="waves-effect waves-cyan"><i class="material-icons">home</i> Home</a></li>
                 <li class="bold"><a href="cad_lancamento.jsp" class="waves-effect waves-cyan"><i class="material-icons">add</i> Novo Lançamento</a></li>
+                <li class="bold"><a href="gerar_balanco.jsp" class="waves-effect waves-cyan"><i class="material-icons">list</i> Gerar Balanço Patrimonial</a></li>
             </ul>
             <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only darken-2 teal"><i class="material-icons" >menu</i></a>
         </aside>

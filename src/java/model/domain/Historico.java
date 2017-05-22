@@ -1,5 +1,6 @@
 package model.domain;
 
+import java.util.ArrayList;
 import model.dao.HistoricoDAO;
 
 /**
@@ -8,6 +9,7 @@ import model.dao.HistoricoDAO;
  */
 public class Historico {
     private int id;
+    private boolean showed;
     private String conta_codigo, tipo, data, observacao, valor;
 
     public Historico() {
@@ -77,6 +79,24 @@ public class Historico {
     public void setValor(String valor) {
         this.valor = valor;
     }
+    
+    public boolean isAtivo() {
+        return this.conta_codigo.charAt(0) == '1';
+    }
+    
+    public boolean isPassivo() {
+        return this.conta_codigo.charAt(0) == '2';
+    }
+
+    public boolean wasShowerd() {
+        return showed;
+    }
+
+    public void setShowed(boolean showed) {
+        this.showed = showed;
+    }
+    
+    
 
     @Override
     public String toString() {
@@ -85,6 +105,10 @@ public class Historico {
     
     public boolean insert(){
         return HistoricoDAO.insert(this);
+    }
+    
+    public static ArrayList<Historico> getAllFromDatabase(){
+        return HistoricoDAO.listar();
     }
     
 }
