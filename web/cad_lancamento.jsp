@@ -5,6 +5,9 @@
     Modified on: May 7, 2017 by Junior
 --%>
 
+<%@page import="model.domain.Conta"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.domain.Usuario"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"
  import="model.domain.Usuario"
@@ -36,6 +39,7 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="css/estilo.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="css/datapicker.css" type="text/css" rel="stylesheet" media="screen,projection">
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
         <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -86,30 +90,43 @@
                     <!--start container-->
                     <div class="container">
                         <br/>
-                        <form method="post" action="CadUsuarioServlet">
+                        <form method="post" action="CadLancamentoServlet">
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="name" name="name" type="text" class="validate">
-                                    <label for="name">Nome</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <select name="tipo" class="browser-default">
-                                        <option value="default" disabled selected>Tipo de Usuário</option>
-                                        <option value="contador">Contador</option>
-                                        <option value="auxiliar">Auxiliar</option>
+                                <div class="input-field col s6 m3">
+                                    <%ArrayList<Conta> allConta = Conta.getAllFromDatabase();%>
+                                    <select id="conta" name="conta" class="browser-default" required>
+                                        <option value="default" disabled selected>Conta</option>
+                                        <%for (Conta conta : allConta) {
+                                            %><option value="<%out.print(conta.getCodigo());%>"><%out.print(conta.getCodigo());%></option><%
+                                        }%>
                                     </select>
+                                </div>
+                                <div class="input-field col s6 m6">
+                                    <input id="name" name="name" type="text" class="validate" disabled>
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <input id="date"  name="date"type="date" class="datepicker" required>
+                                    <label for="date">Data</label>
                                 </div>
                             </div>  
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input id="email" name="email" type="email" class="validate">
-                                    <label for="email">Email</label>
+                                    <select name="tipo" class="browser-default" required>
+                                        <option value="credito">Crédito</option>
+                                        <option value="debito">Débito</option>
+                                    </select>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="password" name="password" type="password" class="validate">
-                                    <label for="password">Senha</label>
+                                    <input id="valor" name="valor" type="text" class="validate" required>
+                                    <label for="valor">Valor</label>
                                 </div>
-                            </div>    
+                            </div>  
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="observacao" name="observacao" class="materialize-textarea"></textarea>
+                                    <label for="observacao">Observação</label>
+                                </div>
+                            </div>
                             <!--botão para salvar as alterações-->
                             <div class="row">
                                 <div class="col s12">
@@ -122,6 +139,7 @@
                                 </div>
                             </div>
                         </form>
+                        <div id="search" name="search" style="display: none;"></div>
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </div>
                     <!--end container-->
@@ -162,6 +180,34 @@
         <script type="text/javascript">
             $("#left_menu").load('menu_aux.jsp');
             $("#navbar").load('navbar_admin.jsp');
+            $('.datepicker').pickadate({
+                selectMonths: true, 
+                selectYears: 15,
+                labelMonthNext: 'Próximo mês',
+                labelMonthPrev: 'Mês Anterior',
+                labelMonthSelect: 'Selecione um mês',
+                labelYearSelect: 'Selecione um ano',
+                monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+                monthsShort: [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+                weekdaysFull: [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado' ],
+                weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab' ],
+                weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+                today: 'Hoje',
+                clear: 'Limpar',
+                close: 'Fechar'
+            });
+            $('#conta').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var labelSelected = optionSelected.text();
+                $("#search").load("search.jsp?find=conta&conta=" + labelSelected);
+                var nomeInput = document.getElementById("name");  
+                
+                setTimeout(function(){
+                    var name = $("#search")["0"].firstElementChild.name;
+                    nomeInput.value = name;
+                }, 500);
+                
+            });
         </script>
 
     </body>

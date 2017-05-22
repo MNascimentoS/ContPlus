@@ -1,9 +1,3 @@
-<%@page import="model.domain.Notificacao" %>
-<%
-    Notificacao notificacao = new Notificacao();
-    notificacao.informError(Notificacao.ERRO_500);
-%>
-
 <!DOCTYPE html>
 <html lang="pt">
 

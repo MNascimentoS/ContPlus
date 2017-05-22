@@ -1,0 +1,40 @@
+.picker__input.picker__input--active {
+  border-color: #009688;
+}
+
+.picker__date-display {
+  background-color: #009688;
+}
+
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+  background: #e0f2f1; 
+}
+
+.picker__weekday-display {
+  background-color: #00695c;
+}
+
+.picker__day.picker__day--today {
+  color: #009688; 
+}
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected {
+  background-color: #009688;
+}
+
+.picker__day--selected.picker__day--outfocus,
+.picker__day--selected:hover.picker__day--outfocus,
+.picker--focused .picker__day--selected.picker__day--outfocus {
+    background-color: #e0f2f1; 
+}
+
+.picker__close, .picker__today {
+  color: #009688; 
+}
+
+button.picker__today:focus, button.picker__clear:focus, button.picker__close:focus {
+  background-color: #e0f2f1; 
+}

@@ -8,7 +8,6 @@
  import="model.domain.Usuario"
 %>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="pt-br">
     <body>  
         <!--Initialize user-->
