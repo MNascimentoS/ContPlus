@@ -88,8 +88,17 @@ public class Usuario {
         UsuarioDAO.validar(this);
     }
     
+    public boolean insert() {
+        return UsuarioDAO.insert(this);
+    }
+    
     public static ArrayList<Usuario> listar() {
         return UsuarioDAO.listar();
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "nome=" + nome + ", email=" + email + ", senha=" + senha + ", tipo=" + tipo + '}';
     }
     
 }

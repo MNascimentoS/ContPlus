@@ -24,7 +24,8 @@ public class UsuarioDAO {
     public UsuarioDAO() {
     }
     
-    public boolean insert(Usuario usuario, String tipo) {
+    public static boolean insert(Usuario usuario) {
+        usuario.toString();
         Connection con = new DatabaseMySQL().getConnection();
         try {
             final String insert = "INSERT INTO usuario (nome, email, senha, tipo) values(?,?,?,?)";
@@ -32,7 +33,7 @@ public class UsuarioDAO {
             pst.setString(1, usuario.getNome());
             pst.setString(2, usuario.getEmail());
             pst.setString(3, usuario.getSenha());
-            pst.setString(4, tipo);
+            pst.setString(4, usuario.getTipo());
             pst.executeUpdate();
             return true;
         } catch (SQLException ex) {

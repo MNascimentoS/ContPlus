@@ -35,6 +35,7 @@
         <!-- CORE CSS-->
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="css/estilo.css" type="text/css" rel="stylesheet" media="screen,projection">
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
         <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -72,10 +73,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Página Inicial</h5>
+                                    <h5 class="breadcrumbs-title">Cadastrar Usuário</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="index_admin.jsp">Cont+</a></li>
-                                        <li class="active">Home</li>
+                                        <li class="active">Cadastrar Usuário</li>
                                     </ol>
                                 </div>
                             </div>
@@ -84,6 +85,44 @@
                     <!--breadcrumbs end-->
                     <!--start container-->
                     <div class="container">
+                        <br/>
+                        <form method="post" action="CadUsuarioServlet">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="name" name="name" type="text" class="validate">
+                                    <label for="name">Nome</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <select name="tipo" class="browser-default">
+                                        <option value="default" disabled selected>Tipo de Usuário</option>
+                                        <option value="contador">Contador</option>
+                                        <option value="auxiliar">Auxiliar</option>
+                                    </select>
+                                </div>
+                            </div>  
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="email" name="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="password" name="password" type="password" class="validate">
+                                    <label for="password">Senha</label>
+                                </div>
+                            </div>    
+                            <!--botão para salvar as alterações-->
+                            <div class="row">
+                                <div class="col s12">
+                                    <button class="btn button waves-effect waves-light grey" type="cancell">
+                                    Cancelar
+                                    </button>
+                                    <button class="btn button waves-effect waves-light teal" type="submit">
+                                    Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </div>
                     <!--end container-->
                 </section>
@@ -123,11 +162,6 @@
         <script type="text/javascript">
             $("#left_menu").load('menu_admin.jsp');
             $("#navbar").load('navbar_admin.jsp');
-            var params = getURLParams();
-            if (params.cad === "true") Materialize.toast('Cadastrado com Sucesso!', 4000);
-            else if (params.cad === "false") Materialize.toast('Erro no Cadastro!', 4000);
-            if (params.alter === "true") Materialize.toast('Alterado com Sucesso!', 4000);
-            else if (params.alter === "false") Materialize.toast('Erro na Alteração!', 4000);
         </script>
 
     </body>

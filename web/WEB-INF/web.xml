@@ -37,4 +37,8 @@
         <filter-name>SessionFilter</filter-name>
         <url-pattern>/index_admin.jsp</url-pattern>
     </filter-mapping>
+	<filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <url-pattern>/index_aux.jsp</url-pattern>
+    </filter-mapping>
 </web-app>

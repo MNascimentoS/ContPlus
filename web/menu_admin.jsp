@@ -15,7 +15,7 @@
         <% Usuario currentUser = (Usuario) (session.getAttribute("currentSessionUser"));%>
         <aside id="left-sidebar-nav">
             <ul id="slide-out" class="side-nav fixed leftside-navigation">
-                <li class="user-details cyan darken-2">
+                <li class="user-details teal">
                     <div class="row">
                         <div class="col col s4 m4 l4">
                             <img src="images/default_user.png" alt="" class="circle responsive-img valign profile-image">
@@ -27,10 +27,9 @@
                     </div>
                 </li>
                 <li class="bold"><a href="index_admin.jsp" class="waves-effect waves-cyan"><i class="material-icons">home</i> Home</a></li>
-                <li class="bold"><a href="cad_geral.jsp" class="waves-effect waves-cyan"><i class="material-icons">add</i> Cadastrar</a></li>
-                <li class="bold"><a href="alter_geral.jsp"class="waves-effect waves-cyan"><i class="material-icons">mode_edit</i> Alterar</a></li>
+                <li class="bold"><a href="cad_usuario.jsp" class="waves-effect waves-cyan"><i class="material-icons">add</i> Cadastrar Usuarios</a></li>
             </ul>
-            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only darken-2 blue"><i class="material-icons" >menu</i></a>
+            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only darken-2 teal"><i class="material-icons" >menu</i></a>
         </aside>
         <!-- END LEFT SIDEBAR NAV-->
         <!-- ================================================
