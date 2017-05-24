@@ -72,6 +72,11 @@ public class Historico {
         this.observacao = observacao;
     }
 
+    public int getValorInt() {
+        String[] parts = valor.split(",");
+        return Integer.valueOf(parts[0]);
+    }
+    
     public String getValor() {
         return valor;
     }
@@ -96,8 +101,6 @@ public class Historico {
         this.showed = showed;
     }
     
-    
-
     @Override
     public String toString() {
         return "Historico{" + "id=" + id + ", conta_codigo=" + conta_codigo + ", tipo=" + tipo + ", data=" + data + ", observacao=" + observacao + ", valor=" + valor + '}';
@@ -109,6 +112,10 @@ public class Historico {
     
     public static ArrayList<Historico> getAllFromDatabase(){
         return HistoricoDAO.listar();
+    }
+    
+    public static ArrayList<Historico> getAllFromDatabase(String dataI, String dataF){
+        return HistoricoDAO.listar(dataI, dataF);
     }
     
 }

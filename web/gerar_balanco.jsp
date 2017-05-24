@@ -25,28 +25,7 @@
 ================================================================================ -->
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="description" content="Página de administração do sistema Sonaes UNEB - Universidade do Estado da Bahia. ">
-        <meta name="keywords" content="sonaes, uneb">
-        <title>Home | Sonaes - Sistema Online de Acompanhamento Estudantil</title>
-        <!-- Favicons-->
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
         <!-- CORE CSS-->
-        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="css/estilo.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="css/balanco.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="css/datapicker.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-        <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <!--ICONS-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
 
     <body>
@@ -56,90 +35,76 @@
         response.setHeader("Pragma","no-cache");
         response.setDateHeader("Expires", 0);
         %>
-        <!--Initialize user-->
-        <%    
-        Usuario currentUser = (Usuario) (session.getAttribute("currentSessionUser")); 
-        %>
-        <!-- End Page Loading -->
-        <!-- START NAVBAR -->
-        <div id="navbar"></div>
-        <!-- END NAVBAR -->
-        <!-- START MAIN -->
-        <div id="main">
-            <!-- START WRAPPER -->
-            <div class="wrapper">
-                <!-- START LEFT SIDEBAR NAV-->
-                <div id="left_menu"></div>
-                <!-- END LEFT SIDEBAR NAV-->
-                <!-- START CONTENT -->
-                <section id="content">
-                    <!--breadcrumbs start-->
-                    <div id="breadcrumbs-wrapper" class=" grey lighten-3">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Gerar Balanço Patrimonial</h5>
-                                    <ol class="breadcrumb">
-                                        <li><a href="index_aux.jsp">Cont+</a></li>
-                                        <li class="active">Balanço Patrimonial</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--breadcrumbs end-->
-                    <!--start container-->
-                    <div class="container">
-                        <br/>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="dateI"  name="dateI" type="date" class="datepicker" required>
-                                    <label for="dateI">Data Inicial</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="dateF"  name="dateF" type="date" class="datepicker" required>
-                                    <label for="dateF">Data Final</label>
-                                </div>
-                            </div>  
-                            <br/>
-                            <!--botão para salvar as alterações-->
-                            <div class="row">
-                                <div class="col s12">
-                                    <button class="btn button waves-effect waves-light grey" type="cancell">
-                                        Cancelar
-                                    </button>
-                                    <button id="submit" class="btn button waves-effect waves-light teal" type="submit" onclick="gerarBalanco()">
-                                        Gerar
-                                    </button>
-                                </div>
-                            </div>
-                        <br/>
-                        <div id="balanco-div" style="display: none;" >
-                            <div id="balanco" class="card small center" style="width: 760px; height: auto; padding: 5px;">
-                            </div>
-                            <br/>
-                            <button class="btn button waves-effect waves-light teal" type="submit">
-                                Imprimir
-                            </button>
-                        </div>
-                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                    </div>
-                    <!--end container-->
-                </section>
-                <!-- END CONTENT -->
-            </div>
-            <!-- END WRAPPER -->
-        </div>
-        <!-- END MAIN -->
-        <!-- START FOOTER -->
-        <footer class="page-footer teal">
-            <div class="footer-copyright">
+        <!-- START CONTENT -->
+        <section id="content">
+            <!--breadcrumbs start-->
+            <div id="breadcrumbs-wrapper" class=" grey lighten-3">
                 <div class="container">
-                    <span>Copyright © 2017 <a class="grey-text text-lighten-4" href="http://www.uneb.br/" target="_blank">Uneb</a> Todos os direitos reservados.</span>
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <h5 class="breadcrumbs-title">Gerar Balanço Patrimonial</h5>
+                            <ol class="breadcrumb">
+                                <li><a href="index_aux.jsp">Cont+</a></li>
+                                <li class="active">Balanço Patrimonial</li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-        <!-- END FOOTER -->
+            <!--breadcrumbs end-->
+            <!--start container-->
+            <div class="container">
+                <br/>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="dateI"  name="dateI" type="date" class="datepicker" required>
+                            <label for="dateI">Data Inicial</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="dateF"  name="dateF" type="date" class="datepicker" required>
+                            <label for="dateF">Data Final</label>
+                        </div>
+                    </div>  
+                    <br/>
+                    <!--botão para salvar as alterações-->
+                    <div class="row">
+                        <div class="col s12">
+                            <button class="btn button waves-effect waves-light grey" type="cancell">
+                                Cancelar
+                            </button>
+                            <button id="submit" class="btn button waves-effect waves-light teal" type="submit" onclick="gerarBalanco()">
+                                Gerar
+                            </button>
+                        </div>
+                    </div>
+                <br/>
+                <div id="balanco-div" class="center" style="display: none;" >
+                    <div id="balanco" class="card small" style="margin: auto; width: 760px; height: auto; padding: 5px;">
+                        <br/><br/>
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div     class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/><br/>
+                    </div>
+                    <br/>
+                    <button onclick="gerarPDF()" class="btn button waves-effect waves-light teal" type="submit">
+                        Imprimir
+                    </button>
+                </div>
+            </div>
+            <!--end container-->
+        </section>
+        <!-- END CONTENT -->
 
         <!-- ================================================
         Scripts
@@ -159,9 +124,10 @@
         <!--plugins.js - Some Specific JS codes for Plugin Settings-->
         <script type="text/javascript" src="js/plugins.js"></script>
         <script type="text/javascript" src="js/padrao.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+        <script type="text/javascript" src="js/html2canvas.js"></script>
+        <script type="text/javascript" src="js/balanco.js"></script>
         <script type="text/javascript">
-            $("#left_menu").load('menu_aux.jsp');
-            $("#navbar").load('navbar_admin.jsp');
             $('.datepicker').pickadate({
                 selectMonths: true, 
                 selectYears: 15,
@@ -183,23 +149,12 @@
                 var labelSelected = optionSelected.text();
                 $("#search").load("search.jsp?find=conta&conta=" + labelSelected);
                 var nomeInput = document.getElementById("name");  
-                
+
                 setTimeout(function(){
                     var name = $("#search")["0"].firstElementChild.name;
                     nomeInput.value = name;
                 }, 500);
             });
-            
-            function gerarBalanco() {
-                document.getElementById('balanco-div').style.display = 'block';
-                var dataI = $("#dateI")["0"].value;
-                dataI = dataI.replace(/\s/g,'');
-                dataI = dataI.replace(/,/g,'');
-                var dataF = $("#dateF")["0"].value;
-                dataF = dataF.replace(/\s/g,'');
-                dataF = dataF.replace(/,/g,'');
-                $("#balanco").load("search.jsp?find=balanco&dataI=" + dataI + "&dataF=" + dataF);
-            }
         </script>
 
     </body>

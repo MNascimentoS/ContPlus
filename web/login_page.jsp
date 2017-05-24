@@ -95,7 +95,7 @@
             <div class="row">
               <div class="input-field col s12">
                   <input style="display:none;" name="option" value="login" type="text"></input>
-                  <button class="btn waves-effect waves-light col s12  green" type="submit" name="action"><strong>ENTRAR</strong></button>
+                  <button class="btn waves-effect waves-light col s12  teal" type="submit" name="action"><strong>ENTRAR</strong></button>
               </div>
             </div>
             <div class="row">
