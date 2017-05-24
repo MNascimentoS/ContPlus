@@ -90,4 +90,30 @@ public class HistoricoDAO {
         
         return allHistorico;
     }
+    
+    public static ArrayList<Historico> listar(String code_count){
+        ArrayList<Historico> allHistorico = new ArrayList();
+        Connection con = new DatabaseMySQL().getConnection();
+        try {
+            PreparedStatement pst = con.prepareStatement("select * from historico where conta_codigo=?");
+            pst.setString(1, code_count);
+            ResultSet resultado = pst.executeQuery();
+            while (resultado.next()) {
+                Historico historico = new Historico();
+                historico.setId(resultado.getInt("id"));
+                historico.setData(resultado.getString("data"));
+                historico.setTipo(resultado.getString("tipo"));
+                historico.setConta_codigo(resultado.getString("conta_codigo"));
+                historico.setValor(resultado.getString("valor"));
+                historico.setObservacao(resultado.getString("observacao"));
+                allHistorico.add(historico);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoricoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            new DatabaseMySQL().desconnect(con);
+        }
+        
+        return allHistorico;
+    }
 }

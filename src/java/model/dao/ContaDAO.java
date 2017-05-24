@@ -24,7 +24,7 @@ public class ContaDAO {
         ArrayList<Conta> allConta = new ArrayList();
         Connection con = new DatabaseMySQL().getConnection();
         try {
-            PreparedStatement pst = con.prepareStatement("select * from conta");
+            PreparedStatement pst = con.prepareStatement("select * from conta ORDER BY nome");
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
                 Conta conta = new Conta();

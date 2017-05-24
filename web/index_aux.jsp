@@ -5,21 +5,24 @@
     Modified on: May 7, 2017 by Junior
 --%>
 
-<%@page import="model.domain.Usuario"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"
- import="model.domain.Usuario"
-%>
+        import="model.domain.Usuario"
+        import="model.domain.Conta"
+        import="model.dao.ContaDAO"
+        import="java.util.ArrayList"
+        %>
 
 <%@page import="model.database.DatabaseMySQL" %>
+
 <!DOCTYPE html>
 <html lang="pt-br">
-<!--================================================================================
-	Item Name: Home Screen
-	Version: 1.0
-	Author: GeeksLabs
-        Modified by: Mateus Nascimento
-	Author URL: http://www.themeforest.net/user/geekslabs
-================================================================================ -->
+    <!--================================================================================
+            Item Name: Home Screen
+            Version: 1.0
+            Author: GeeksLabs
+            Modified by: Mateus Nascimento
+            Author URL: http://www.themeforest.net/user/geekslabs
+    ================================================================================ -->
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,7 +31,7 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="description" content="Página de administração do sistema Sonaes UNEB - Universidade do Estado da Bahia. ">
         <meta name="keywords" content="sonaes, uneb">
-        <title>Home | Sonaes - Sistema Online de Acompanhamento Estudantil</title>
+        <title>Home | ContPlus - Sistema de contabilidade</title>
         <!-- Favicons-->
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -44,15 +47,18 @@
     </head>
 
     <body>
-        <% 
-        response.setHeader("Cache-Control","no-cache");
-        response.setHeader("Cache-Control","no-store");
-        response.setHeader("Pragma","no-cache");
-        response.setDateHeader("Expires", 0);
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires", 0);
         %>
         <!--Initialize user-->
-        <%    
-        Usuario currentUser = (Usuario) (session.getAttribute("currentSessionUser")); 
+        <%
+            Usuario currentUser = (Usuario) (session.getAttribute("currentSessionUser"));
+            //load all counts
+            ArrayList<Conta> contas = new ArrayList<Conta>();
+            contas = ContaDAO.listar();
         %>
         <!-- End Page Loading -->
         <!-- START NAVBAR -->
@@ -75,7 +81,7 @@
                                     <h5 class="breadcrumbs-title">Página Inicial</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="index_aux.jsp">Cont+</a></li>
-                                        <li class="active">Home</li>
+                                        <li class="active">Razão</li>
                                     </ol>
                                 </div>
                             </div>
@@ -83,7 +89,49 @@
                     </div>
                     <!--breadcrumbs end-->
                     <!--start container-->
-                    <div class="container">
+                    <div class="container" id="historics">
+                        <ul class="collection with-header">
+                            <li class="collection-header" id="name"><h4>Razão</h4>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s6 3">
+                                        <label>Conta</label>
+                                        <select id="select_count" class="browser-default center" id="situacao">
+                                            <option value="Todos" disabled selected>Selecione</option>
+                                            <%for(int i = 0; i < contas.size(); i++){%>
+                                                <option value="<%= contas.get(i).getCodigo()%>"><%= contas.get(i).getNome()%></option> 
+                                           <%} 
+                                            %>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <!--table listing all historic of count-->
+                            <li class="collection-item">
+                        <!--Table  to render all processes-->
+                        <table id="processes" class="centered">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Nº</th>
+                                    <th>Contrapartida</th>
+                                    <th>Histórico</th>
+                                    <th>Débito</th>
+                                    <th>Crédito</th>
+                                    <th>D/C</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="t_body">
+
+                            </tbody>
+                        </table>
+                       </li>
+                      </ul>
+                      <div class="center">                
+                      </div>
                     </div>
                     <!--end container-->
                 </section>
@@ -93,13 +141,6 @@
         </div>
         <!-- END MAIN -->
         <!-- START FOOTER -->
-        <footer class="page-footer teal">
-            <div class="footer-copyright">
-                <div class="container">
-                    <span>Copyright © 2017 <a class="grey-text text-lighten-4" href="http://www.uneb.br/" target="_blank">Uneb</a> Todos os direitos reservados.</span>
-                </div>
-            </div>
-        </footer>
         <!-- END FOOTER -->
 
         <!-- ================================================
@@ -120,14 +161,19 @@
         <!--plugins.js - Some Specific JS codes for Plugin Settings-->
         <script type="text/javascript" src="js/plugins.js"></script>
         <script type="text/javascript" src="js/padrao.js"></script>
+        <script type="text/javascript" src="js/search_historic.js"></script>
         <script type="text/javascript">
             $("#left_menu").load('menu_aux.jsp');
             $("#navbar").load('navbar_admin.jsp');
             var params = getURLParams();
-            if (params.cad === "true") Materialize.toast('Cadastrado com Sucesso!', 4000);
-            else if (params.cad === "false") Materialize.toast('Erro no Cadastro!', 4000);
-            if (params.alter === "true") Materialize.toast('Alterado com Sucesso!', 4000);
-            else if (params.alter === "false") Materialize.toast('Erro na Alteração!', 4000);
+            if (params.cad === "true")
+                Materialize.toast('Cadastrado com Sucesso!', 4000);
+            else if (params.cad === "false")
+                Materialize.toast('Erro no Cadastro!', 4000);
+            if (params.alter === "true")
+                Materialize.toast('Alterado com Sucesso!', 4000);
+            else if (params.alter === "false")
+                Materialize.toast('Erro na Alteração!', 4000);
         </script>
 
     </body>

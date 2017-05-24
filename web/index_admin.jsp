@@ -28,7 +28,7 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="description" content="Página de administração do sistema Sonaes UNEB - Universidade do Estado da Bahia. ">
         <meta name="keywords" content="sonaes, uneb">
-        <title>Home | Sonaes - Sistema Online de Acompanhamento Estudantil</title>
+        <title>Home | ContPlus - Sistema de Contabilidade</title>
         <!-- Favicons-->
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
