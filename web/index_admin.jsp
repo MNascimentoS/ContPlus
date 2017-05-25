@@ -5,6 +5,9 @@
     Modified on: May 7, 2017 by Junior
 --%>
 
+<%@page import="model.domain.Conta"%>
+<%@page import="model.dao.ContaDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.domain.Usuario"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"
  import="model.domain.Usuario"
@@ -52,8 +55,10 @@
         response.setDateHeader("Expires", 0);
         %>
         <!--Initialize user-->
-        <%    
-        Usuario currentUser = (Usuario) (session.getAttribute("currentSessionUser")); 
+        <%
+            Usuario currentUser = (Usuario) (session.getAttribute("currentSessionUser"));
+            //load all counts
+            ArrayList<Conta> contas = ContaDAO.listar();
         %>
         <!-- End Page Loading -->
         <!-- START NAVBAR -->
@@ -84,7 +89,49 @@
                     </div>
                     <!--breadcrumbs end-->
                     <!--start container-->
-                    <div class="container">
+                    <div class="container" id="historics">
+                        <ul class="collection with-header">
+                            <li class="collection-header" id="name"><h4>Razão</h4>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s6 3">
+                                        <label>Conta</label>
+                                        <select id="select_count" class="browser-default center" id="situacao">
+                                            <option value="Todos" disabled selected>Selecione</option>
+                                            <%for(int i = 0; i < contas.size(); i++){%>
+                                                <option value="<%= contas.get(i).getCodigo()%>"><%= contas.get(i).getNome()%></option> 
+                                           <%} 
+                                            %>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <!--table listing all historic of count-->
+                            <li class="collection-item">
+                        <!--Table  to render all processes-->
+                        <table id="processes" class="centered">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Nº</th>
+                                    <th>Contrapartida</th>
+                                    <th>Histórico</th>
+                                    <th>Débito</th>
+                                    <th>Crédito</th>
+                                    <th>D/C</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="t_body">
+
+                            </tbody>
+                        </table>
+                       </li>
+                      </ul>
+                      <div class="center">                
+                      </div>
                     </div>
                     <!--end container-->
                 </section>
@@ -117,6 +164,7 @@
         <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <!-- chartist -->
         <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>
+        <script type="text/javascript" src="js/search_historic.js"></script>
 
         <!--plugins.js - Some Specific JS codes for Plugin Settings-->
         <script type="text/javascript" src="js/plugins.js"></script>
