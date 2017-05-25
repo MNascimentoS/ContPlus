@@ -31,7 +31,7 @@ public class CadLancamentoServlet extends HttpServlet {
         boolean cadastrado;
         Historico lancamento = new Historico();
         lancamento.setConta_codigo(request.getParameter("conta"));
-        lancamento.setData(Utils.getData(request.getParameter("date")));
+        lancamento.setData(Utils.getFormatedData(request.getParameter("date")));
         lancamento.setTipo(request.getParameter("tipo"));
         lancamento.setValor(request.getParameter("valor"));
         lancamento.setObservacao(request.getParameter("observacao"));
