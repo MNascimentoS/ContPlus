@@ -99,9 +99,13 @@
                                         <label>Conta</label>
                                         <select id="select_count" class="browser-default center" id="situacao">
                                             <option value="Todos" disabled selected>Selecione</option>
-                                            <%for(int i = 0; i < contas.size(); i++){%>
-                                                <option value="<%= contas.get(i).getCodigo()%>"><%= contas.get(i).getNome()%></option> 
-                                           <%} 
+                                            <%for (int i = 0; i < contas.size(); i++) {
+                                                    if (contas.get(i).getCodigo().length() < 4) {%>
+                                                        <option value="<%= contas.get(i).getCodigo()%>" disabled><%= contas.get(i).getNome()%></option> 
+                                                 <% }else{ %>
+                                                        <option value="<%= contas.get(i).getCodigo()%>"><%= contas.get(i).getNome()%></option> 
+                                                  <%}
+                                            }
                                             %>
                                         </select>
                                     </div>
@@ -110,28 +114,28 @@
                             </li>
                             <!--table listing all historic of count-->
                             <li class="collection-item">
-                        <!--Table  to render all processes-->
-                        <table id="processes" class="centered">
-                            <thead>
-                                <tr>
-                                    <th>Data</th>
-                                    <th>Nº</th>
-                                    <th>Contrapartida</th>
-                                    <th>Histórico</th>
-                                    <th>Débito</th>
-                                    <th>Crédito</th>
-                                    <th>D/C</th>
-                                </tr>
-                            </thead>
+                                <!--Table  to render all processes-->
+                                <table id="processes" class="centered">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Nº</th>
+                                            <th>Contrapartida</th>
+                                            <th>Histórico</th>
+                                            <th>Débito</th>
+                                            <th>Crédito</th>
+                                            <th>D/C</th>
+                                        </tr>
+                                    </thead>
 
-                            <tbody id="t_body">
+                                    <tbody id="t_body">
 
-                            </tbody>
-                        </table>
-                       </li>
-                      </ul>
-                      <div class="center">                
-                      </div>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                        <div class="center">                
+                        </div>
                     </div>
                     <!--end container-->
                 </section>
