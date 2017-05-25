@@ -20,11 +20,29 @@ import model.domain.Conta;
  * @author mateus
  */
 public class ContaDAO {
+    
+    public static boolean insert(Conta conta) {
+        Connection con = new DatabaseMySQL().getConnection();
+        try {
+            final String insert = "INSERT INTO conta (codigo, nome) values(?,?)";
+            PreparedStatement pst = con.prepareStatement(insert);
+            pst.setString(1, conta.getCodigo());
+            pst.setString(2, conta.getNome());
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ContaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            new DatabaseMySQL().desconnect(con);
+        }
+        return false;
+    }
+    
     public static ArrayList<Conta> listar(){
         ArrayList<Conta> allConta = new ArrayList();
         Connection con = new DatabaseMySQL().getConnection();
         try {
-            PreparedStatement pst = con.prepareStatement("select * from conta ORDER BY nome");
+            PreparedStatement pst = con.prepareStatement("select * from conta");
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
                 Conta conta = new Conta();

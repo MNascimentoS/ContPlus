@@ -27,6 +27,7 @@
                 </li>
                 <li class="bold"><a href="index_admin.jsp" class="waves-effect waves-cyan"><i class="material-icons">home</i> Home</a></li>
                 <li class="bold"><a href="cad_usuario.jsp" class="waves-effect waves-cyan"><i class="material-icons">add</i> Cadastrar Usuarios</a></li>
+                <li class="bold"><a onclick="carregar('cad_conta.jsp')" href="#" class="waves-effect waves-cyan"><i class="material-icons">library_add</i> Nova Conta</a></li>
                 <li class="bold"><a onclick="carregar('cad_lancamento.jsp')" href="#" class="waves-effect waves-cyan"><i class="material-icons">note_add</i> Novo Lançamento</a></li>
                 <li class="bold"><a onclick="carregar('gerar_balanco.jsp')" href="#" class="waves-effect waves-cyan"><i class="material-icons">list</i> Gerar Balanço Patrimonial</a></li>
             </ul>

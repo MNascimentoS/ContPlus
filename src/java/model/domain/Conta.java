@@ -34,6 +34,10 @@ public class Conta {
         this.nome = nome;
     }
     
+    public boolean insert() {
+        return ContaDAO.insert(this);
+    }
+    
     public void fillFromDatabase() {
         Conta conta = ContaDAO.select(this);
         this.codigo = conta.getCodigo();
