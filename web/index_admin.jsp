@@ -99,9 +99,13 @@
                                         <label>Conta</label>
                                         <select id="select_count" class="browser-default center" id="situacao">
                                             <option value="Todos" disabled selected>Selecione</option>
-                                            <%for(int i = 0; i < contas.size(); i++){%>
-                                                <option value="<%= contas.get(i).getCodigo()%>"><%= contas.get(i).getNome()%></option> 
-                                           <%} 
+                                            <%for (int i = 0; i < contas.size(); i++) {
+                                                    if (contas.get(i).getCodigo().length() < 4) {%>
+                                                        <option value="<%= contas.get(i).getCodigo()%>" disabled><%= contas.get(i).getNome()%></option> 
+                                                 <% }else{ %>
+                                                        <option value="<%= contas.get(i).getCodigo()%>"><%= contas.get(i).getNome()%></option> 
+                                                  <%}
+                                            }
                                             %>
                                         </select>
                                     </div>
@@ -140,15 +144,6 @@
             <!-- END WRAPPER -->
         </div>
         <!-- END MAIN -->
-        <!-- START FOOTER -->
-        <footer class="page-footer teal">
-            <div class="footer-copyright">
-                <div class="container">
-                    <span>Copyright © 2017 <a class="grey-text text-lighten-4" href="http://www.uneb.br/" target="_blank">Uneb</a> Todos os direitos reservados.</span>
-                </div>
-            </div>
-        </footer>
-        <!-- END FOOTER -->
 
         <!-- ================================================
         Scripts
