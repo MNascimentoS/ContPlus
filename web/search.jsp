@@ -98,7 +98,7 @@
                         %>
                         <%
                             if (historico.getTipo().equals("credito")) {
-                                valorA += historico.getValorInt();
+                                valorA -= historico.getValorInt();
                                 %>
                                 <td class="tg-z5sk"></td>
                                 <td class="tg-z5sk"><%out.print("R$" + historico.getValor());%></td>
@@ -147,7 +147,7 @@
                         <td class="tg-hhim" colspan="2"><%out.print(historico.getData()+ "   -   " + historico.getConta_codigo() + " - " + conta.getNome());%></td>
                         <%
                             if (historico.getTipo().equals("debito")) {
-                                valorP += historico.getValorInt();
+                                valorP -= historico.getValorInt();
                                 %>
                                 <td class="tg-z5sk"><%out.print("R$" + historico.getValor());%></td>
                                 <td class="tg-z5sk"></td>
